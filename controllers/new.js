@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
 //khởi tạo model
-const Product = mongoose.model('Product', {name:String,price:String,desc:String, quantity:Number, cateId:Number})
+const New = mongoose.model('New', {title:String, desc:String})
 
 //api list sp
 export const list = async (req, res) => {
     try {
-        const products = await Product.find()
-        res.json(products);
+        const news = await New.find()
+        res.json(news);
     } catch (error) {
         res.status(404).json({
-            message: "không load đc sp"
+            message: "không load đc ds"
         })
     }
 }
@@ -18,8 +18,8 @@ export const list = async (req, res) => {
 //load 1 sp
 export const read = async (req, res) => {
     try {
-        const products = await Product.findOne({_id:req.params.id}).exec()
-        res.json(products)
+        const news = await New.findOne({_id:req.params.id}).exec()
+        res.json(news)
     } catch (error) {
         res.status(400).json({
             message:"không load đc"
@@ -30,8 +30,8 @@ export const read = async (req, res) => {
 //api thêm sp
 export const create = async (req, res) => {
     try {
-        const product =  await new Product(req.body).save()
-        res.json(product);
+        const news =  await new New(req.body).save()
+        res.json(news);
     } catch (error) {
         res.status(400).json({
             message:"không thêm đc sp"
@@ -42,8 +42,8 @@ export const create = async (req, res) => {
 //api xóa
 export const remove = async(req, res) => {
     try {
-        const products = await Product.findOneAndDelete({_id:req.params.id}).exec()
-        res.json(products)
+        const news = await New.findOneAndDelete({_id:req.params.id}).exec()
+        res.json(news)
     } catch (error) {
         res.status(400).json({
             message:"không xóa đc"
@@ -54,8 +54,8 @@ export const remove = async(req, res) => {
 //api update
 export const update = async (req, res) => {
     try {
-        const products = await Product.findOneAndUpdate({id:req.params.id}, req.body).exec()
-        res.json(products)
+        const news = await New.findOneAndUpdate({id:req.params.id}, req.body).exec()
+        res.json(news)
     } catch (error) {
         res.status(400).json({
             message:"không sửa đc"
