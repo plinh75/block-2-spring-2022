@@ -1,7 +1,4 @@
-import mongoose from "mongoose";
-
-//khởi tạo model
-const Product = mongoose.model('Product', {name:String,price:String,desc:String, quantity:Number, cateId:Number})
+import Product from '../models/product'
 
 //api list sp
 export const list = async (req, res) => {
@@ -18,7 +15,7 @@ export const list = async (req, res) => {
 //load 1 sp
 export const read = async (req, res) => {
     try {
-        const products = await Product.findOne({_id:req.params.id}).exec()
+        const products = await Product.findOne({_id:req.params.id})
         res.json(products)
     } catch (error) {
         res.status(400).json({
@@ -42,7 +39,7 @@ export const create = async (req, res) => {
 //api xóa
 export const remove = async(req, res) => {
     try {
-        const products = await Product.findOneAndDelete({_id:req.params.id}).exec()
+        const products = await Product.findOneAndDelete({_id:req.params.id})
         res.json(products)
     } catch (error) {
         res.status(400).json({
@@ -54,7 +51,7 @@ export const remove = async(req, res) => {
 //api update
 export const update = async (req, res) => {
     try {
-        const products = await Product.findOneAndUpdate({id:req.params.id}, req.body).exec()
+        const products = await Product.findOneAndUpdate({id:req.params.id}, req.body)
         res.json(products)
     } catch (error) {
         res.status(400).json({

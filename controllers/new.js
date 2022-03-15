@@ -18,7 +18,7 @@ export const list = async (req, res) => {
 //load 1 sp
 export const read = async (req, res) => {
     try {
-        const news = await New.findOne({_id:req.params.id}).exec()
+        const news = await New.findOne({_id:req.params.id})
         res.json(news)
     } catch (error) {
         res.status(400).json({
@@ -42,7 +42,7 @@ export const create = async (req, res) => {
 //api xóa
 export const remove = async(req, res) => {
     try {
-        const news = await New.findOneAndDelete({_id:req.params.id}).exec()
+        const news = await New.findOneAndDelete({_id:req.params.id})
         res.json(news)
     } catch (error) {
         res.status(400).json({
@@ -54,7 +54,7 @@ export const remove = async(req, res) => {
 //api update
 export const update = async (req, res) => {
     try {
-        const news = await New.findOneAndUpdate({id:req.params.id}, req.body).exec()
+        const news = await New.findOneAndUpdate({id:req.params.id}, req.body)
         res.json(news)
     } catch (error) {
         res.status(400).json({
