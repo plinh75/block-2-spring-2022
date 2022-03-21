@@ -15,6 +15,7 @@ const app = express();
 app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.json());// phải đứng trc để chuyển kiểu 
+
 // app.use(productRouter);
 // app.use(newRouter);
 app.use(userRouter);
@@ -22,7 +23,7 @@ app.use(productRouter)
 app.use(categoryRouter)
 
 // connect databse
-mongoose.connect('mongodb://localhost:27017/web16309')
+mongoose.connect('mongodb://localhost:27017/we16309')
 .then(() => console.log("Kết nối db thành công"))
 .catch((error) => console.log(error));
 
