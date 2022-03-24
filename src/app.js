@@ -18,9 +18,9 @@ app.use(express.json());// phải đứng trc để chuyển kiểu
 
 // app.use(productRouter);
 // app.use(newRouter);
-app.use(userRouter);
-app.use(productRouter)
-app.use(categoryRouter)
+app.use("/api",userRouter);
+app.use("/api",productRouter)
+app.use("/api",categoryRouter)
 
 // connect databse
 mongoose.connect('mongodb://localhost:27017/we16309')

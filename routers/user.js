@@ -1,9 +1,9 @@
-import { Router} from 'express'
-import { checkAuth } from '../middlewares/checkAuth'
-import { signup, signin } from '../controllers/user'
+import { Router } from 'express'
+import {signin, signup} from '../controllers/user'
+
 const router = Router()
 
-router.post('/signup', checkAuth, signup)
-router.get('/signin', checkAuth, signin)
+router.post('/signup', signup)
+router.post('/signin', signin)
 
 export default router
