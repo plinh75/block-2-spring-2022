@@ -1,10 +1,12 @@
-import { useEffect ,useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import {Navigate, NavLink, Routes, Route} from 'react-router-dom'
+import { Navigate, NavLink, Routes, Route } from 'react-router-dom'
 import ShowInfo from './components/ShowInfo'
 
-import type {Product} from './types/product'
-import {add, list} from './api/product'
+import type { ProductType } from './types/product'
+import { UserType} from './types/user'
+import { add, list, remove, update } from './api/product'
+import {signup} from './api/user'
 
 import HomePage from './pages/HomePage'
 import ProductPage from './pages/ProductPage'
@@ -14,24 +16,47 @@ import WebsiteLayout from './pages/layouts/WebsiteLayout'
 import ProductManager from './pages/ProductManager'
 import ProductDetail from './pages/ProductDetail'
 import ProductAdd from './pages/ProductAdd'
+import ProductEdit from './pages/ProductEdit'
+import PrivateRouter from './components/PrivateRouter'
+import Signup from './pages/Signup'
 
 function App() {
-  const [products, setProducts] = useState<{_id: number, name: string}[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
   useEffect(() => {
     const getProducts = async () => {
-        const { data } = await list();
-        setProducts(data);
+      const { data } = await list();
+      setProducts(data);
     }
     getProducts();
   }, [])
 
-  const onHandleAdd = async (product:any) => {
-    console.log('app.js', product);
+  const onHandleAdd = async (product: any) => {
     const { data } = await add(product) //api
     setProducts([...products, data])
   }
-  
-  return ( <div className="App">
+
+  const onHandleRemove = async (id: any) => {
+    remove(id)
+    setProducts(products.filter(item => item.id !== id))
+  }
+
+  const onHandleUpdate = async (product: ProductType) => {
+    try {
+      const { data } = await update(product)
+      setProducts(products.map(item => item.id === data.id ? product : item))
+    } catch (error) {
+
+    }
+  }
+
+  //signup
+  const [users, setUsers] = useState<UserType[]>([])
+  const onHandleSignup = async (user: any) => {
+    const { data } = await signup(user)
+    setUsers([...users, data])
+  }
+
+  return (<div className="App">
     <header>
       <ul>
         <li><NavLink to="/">Home page</NavLink></li>
@@ -40,18 +65,29 @@ function App() {
       </ul>
     </header>
     <main>
-    <Routes>
-              <Route path="/" element={<WebsiteLayout />}>
-                  <Route index element={<HomePage />} />
-                    <Route path="product" element={<ProductPage />}  />
-                    <Route path="/product/:id" element={<ProductDetail />} />
-                    <Route path="/product/add" element={<ProductAdd name="Dat" onAdd={onHandleAdd} />} />
-              </Route>
-              <Route path="admin" element={<AdminLayout />}>
-                  <Route index element={<Navigate to="dashboard" />} />
-                  <Route path="dashboard" element={<DashboardPage />} />
-              </Route>
-            </Routes>
+      <Routes>
+        
+        <Route path="/" element={<WebsiteLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="product">
+            <Route index element={<ProductPage />} />
+            <Route path=":id" element={<ProductDetail />} />
+          </Route>
+        </Route>
+
+        <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
+          <Route index element={<Navigate to="dashboard" />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="product">
+            <Route index element={<ProductManager products={products} onRemove={onHandleRemove} />} />
+            <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
+            <Route path="add" element={<ProductAdd onAdd={onHandleAdd} />} />
+          </Route>
+        </Route>
+
+        <Route path="/signup" element = {<Signup onSignup={onHandleSignup} />} />
+        
+        </Routes>
     </main>
   </div>
   )
