@@ -4,9 +4,7 @@ import { Navigate, NavLink, Routes, Route } from 'react-router-dom'
 import ShowInfo from './components/ShowInfo'
 
 import type { ProductType } from './types/product'
-import { UserType} from './types/user'
 import { add, list, remove, update } from './api/product'
-import {signup} from './api/user'
 
 import HomePage from './pages/HomePage'
 import ProductPage from './pages/ProductPage'
@@ -19,6 +17,7 @@ import ProductAdd from './pages/ProductAdd'
 import ProductEdit from './pages/ProductEdit'
 import PrivateRouter from './components/PrivateRouter'
 import Signup from './pages/Signup'
+import Signin from './pages/Signin'
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
@@ -47,13 +46,6 @@ function App() {
     } catch (error) {
 
     }
-  }
-
-  //signup
-  const [users, setUsers] = useState<UserType[]>([])
-  const onHandleSignup = async (user: any) => {
-    const { data } = await signup(user)
-    setUsers([...users, data])
   }
 
   return (<div className="App">
@@ -85,8 +77,8 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="/signup" element = {<Signup onSignup={onHandleSignup} />} />
-        
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/signin" element={<Signin/>} />
         </Routes>
     </main>
   </div>

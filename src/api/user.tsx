@@ -5,3 +5,7 @@ export const signup = (user:any) => {
     return instance.post(url, user)
 }
 
+export const signin = (user:any) => {
+    const url = `users`
+    return instance.post(url, user)
+}
