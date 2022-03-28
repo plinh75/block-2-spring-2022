@@ -6,12 +6,13 @@ import {signup} from '../api/user'
 type SignupInput = {
     email: string,
     password: string,
-    username: string
+    name: string
 }
 
 const Signup = () => {
     const {register, handleSubmit, formState : { errors}} = useForm<SignupInput>()
     const navigate = useNavigate()
+
     const onSubmit :SubmitHandler<SignupInput> = data =>{
         signup(data)
         navigate("/signin")
@@ -21,7 +22,7 @@ const Signup = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <input type="email" {...register('email')} placeholder="email"/>
             <input type="password" {...register('password')} placeholder="password"/>
-            <input type="text" {...register('username')} placeholder="username"/>
+            <input type="text" {...register('name')} placeholder="name"/>
             <button>đăng kí</button>
         </form>
     </div>

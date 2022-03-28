@@ -15,6 +15,7 @@ export const signup = async (req, res) => {
         const user = await new User({email, name, password}).save()
         res.json({
             user: {
+                role:user.role,
                 name: user.name,
                 email: user.email,
                 _id: user._id
@@ -46,6 +47,7 @@ export const signin = async (req, res) => {
         res.json({
             token,
             user: {
+                role:user.role,
                 name: user.name,
                 email: user.email,
                 _id: user._id
