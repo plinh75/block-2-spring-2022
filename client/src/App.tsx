@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Navigate, NavLink, Routes, Route } from 'react-router-dom'
 import ShowInfo from './components/ShowInfo'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import type { ProductType } from './types/product'
 import { add, list, remove, update } from './api/product'
@@ -60,12 +61,9 @@ function App() {
     <main>
       <Routes>
         
-        <Route path="/" element={<WebsiteLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="product">
-            <Route index element={<ProductPage />} />
-            <Route path=":id" element={<ProductDetail />} />
-          </Route>
+      <Route path='/' element={<WebsiteLayout/>}>
+          {/* <Route index element={<ProductList products={products} />} /> */}
+          <Route path='/product/:id' element={<ProductDetail />}/>
         </Route>
 
         <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
