@@ -30,5 +30,9 @@ export const isAuth = (req, res, next) => {
 }
 
 export const isAdmin = (req, res, next) => {
-    
+    if(req.profile.role === 0){
+        res.status(400).json({
+            message: 'không phải admin'
+        })
+    }
 }

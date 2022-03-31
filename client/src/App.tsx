@@ -6,7 +6,7 @@ import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product'
 import { add, list, remove, update } from './api/product'
 
-import HomePage from './pages/HomePage'
+
 import ProductPage from './pages/ProductPage'
 import DashboardPage from './pages/DashboardPage'
 import AdminLayout from './pages/layouts/AdminLayout'
@@ -18,6 +18,7 @@ import ProductEdit from './pages/ProductEdit'
 import PrivateRouter from './components/PrivateRouter'
 import Signup from './pages/Signup'
 import Signin from './pages/Signin'
+import HomePage from './pages/HomePage'
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])

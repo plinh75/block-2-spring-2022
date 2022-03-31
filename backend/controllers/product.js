@@ -59,3 +59,8 @@ export const update = async (req, res) => {
         })
     }
 }
+
+//search
+export const search = async (req, res) => {
+    const searchString = req.query.q
+}

@@ -16,4 +16,6 @@ router.patch('/product/:id', checkAuth, update)
 
 router.param('userId', userById);
 
+router
+
 export default router;
