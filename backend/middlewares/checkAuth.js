@@ -35,4 +35,5 @@ export const isAdmin = (req, res, next) => {
             message: 'không phải admin'
         })
     }
+    next();
 }
