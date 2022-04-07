@@ -2,10 +2,8 @@ import mongoose, {Schema, ObjectId} from 'mongoose';
 
 const productSchema = new Schema({
     name: {
-        type: String, 
-        minLength:5, 
+        type: String,  
         required: true,
-        unique: true, 
         index: true
     },
     price: {
@@ -21,4 +19,5 @@ const productSchema = new Schema({
         ref: "Category"
     }
 },{timestamps:true})
+productSchema.index({'$**': 'text'});
 export default mongoose.model('Product', productSchema)
