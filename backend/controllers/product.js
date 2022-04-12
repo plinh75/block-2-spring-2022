@@ -6,7 +6,7 @@ export const list = async (req, res) => {
         const products = await Product.find()
         res.json(products);
     } catch (error) {
-        res.status(404).json({
+        res.status(400).json({
             message: "không load đc sp"
         })
     }
@@ -63,14 +63,10 @@ export const update = async (req, res) => {
 //search
 export const search = async (req, res) => {
     const searchString = req.query.q
-
     try {
-       
         const result = await Product.find({$text: {$search: searchString}})
-        console.log(searchString)
         res.json(result) 
     } catch (error) {
         console.log(error)
-        
     }
 }
