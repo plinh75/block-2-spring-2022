@@ -51,7 +51,7 @@ export const remove = async(req, res) => {
 //api update
 export const update = async (req, res) => {
     try {
-        const products = await Product.findOneAndUpdate({_id:req.params.id}, req.body)
+        const products = await Product.findOneAndUpdate({_id:req.params.id}, req.body,{new:true}).exec()
         res.json(products)
     } catch (error) {
         res.status(400).json({
