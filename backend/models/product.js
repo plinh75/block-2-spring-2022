@@ -3,16 +3,16 @@ import mongoose, {Schema, ObjectId} from 'mongoose';
 const productSchema = new Schema({
     name: {
         type: String,  
-        required: true,
+        // required: true,
         index: true
     },
     price: {
         type: Number, 
-        required: true
+        // required: true
     },
     img:{
         type: String,
-        required: true
+        // required: true
     },
     category: {
         type: ObjectId, 

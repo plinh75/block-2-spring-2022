@@ -8,11 +8,11 @@ router.get('/product', checkAuth, list);
 
 router.get('/product/:id', checkAuth, read);
 
-router.post('/product/:userId', requireSignin, isAuth, isAdmin, create);
+router.post('/product', create);
 
-router.delete('/product/:userId/:id', requireSignin, isAuth, isAdmin, remove);
+router.delete('/product/:id', remove);
 
-router.put('/product/:userId/:id', requireSignin, isAuth, isAdmin, update);
+router.put('/product/:id', update);
 
 router.post('/search', search)
 

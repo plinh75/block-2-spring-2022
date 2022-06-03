@@ -7,7 +7,7 @@ export const list = async (req, res) => {
         res.json(products);
     } catch (error) {
         res.status(400).json({
-            message: "không load đc sp"
+            message: "không load đc ds"
         })
     }
 }
@@ -19,7 +19,7 @@ export const read = async (req, res) => {
         res.json(products)
     } catch (error) {
         res.status(400).json({
-            message:"không load đc"
+            message:"không load đc sp"
         })
     }
 }
